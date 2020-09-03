@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">taxispb</string>
+    <string name="alert_ok">OK</string>
+    <string name="alert_cancel">Отмена</string>
+    <string name="alert_retry">Повторить</string>
+    <string name="message_default_title">Сообщение</string>
+    <string name="message_enable_wifi">Включите интернет</string>
+    <string name="message_permission_denied"><![CDATA[Если отключить разрешение, вы не сможете использовать сервис. Включите разрешение в [Setting] > [Permission]]]></string>
+    <string name="prompt_enable_gps">Вы желаете включить GPS?</string>
+    <string name="error">Ошибка!</string>
+    <string name="warning">Внимание!</string>
+    <string name="info">Информация!</string>
+    <string name="login_failed">Ошибка входа.</string>
+
+
+
+
+
+
+</resources>

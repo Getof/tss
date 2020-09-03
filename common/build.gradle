@@ -1,0 +1,53 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion 29
+    buildToolsVersion "29.0.2"
+    defaultConfig {
+        minSdkVersion 16
+        targetSdkVersion 29
+        versionCode 1
+        versionName "1.0.0"
+        vectorDrawables.useSupportLibrary = true
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    dataBinding {
+        enabled true
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+    api('io.socket:socket.io-client:1.0.0') {
+        exclude group: 'org.json', module: 'json'
+    }
+
+    api 'com.android.databinding:library:4.0.1'
+    api 'com.android.databinding:adapters:4.0.1'
+    api 'org.greenrobot:eventbus:3.2.0'
+    api 'com.afollestad.material-dialogs:core:0.9.6.0'
+    api 'gun0912.ted:tedpermission:2.2.2'
+    api 'com.tapadoo.android:alerter:5.0.0'
+    api 'com.github.bumptech.glide:glide:4.11.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
+    api 'de.hdodenhof:circleimageview:3.1.0'
+    api 'com.github.esafirm.android-image-picker:imagepicker:2.2.0'
+    api 'com.github.yalantis:ucrop:2.2.4'
+    api 'com.google.code.gson:gson:2.8.6'
+    api 'com.google.firebase:firebase-core:17.5.0'
+    api 'com.google.firebase:firebase-auth:19.3.2'
+    api 'com.firebaseui:firebase-ui-auth:4.3.1'
+    api 'com.google.android.gms:play-services-maps:17.0.0'
+
+
+    annotationProcessor 'org.greenrobot:eventbus-annotation-processor:3.2.0'
+
+}

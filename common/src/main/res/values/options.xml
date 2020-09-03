@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="server_address" translatable="false">http://45.129.2.154:8080/</string>
+</resources>
