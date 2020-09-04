@@ -19,6 +19,7 @@ import androidx.databinding.DataBindingUtil;
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.IdpResponse;
 import com.google.android.gms.maps.model.LatLng;
+import com.gun0912.tedpermission.BuildConfig;
 import com.gun0912.tedpermission.PermissionListener;
 import com.gun0912.tedpermission.TedPermission;
 
@@ -176,7 +177,7 @@ public class SplashActivity extends BaseActivity implements LocationListener {
         binding.progressBar.setVisibility(View.VISIBLE);
         if (phone.substring(0,1).equals("+"))
             phone = phone.substring(1);
-        eventBus.post(new LoginEvent(Long.valueOf(phone), BuildConfig.VERSION_CODE));
+        eventBus.post(new LoginEvent(Long.parseLong(phone), BuildConfig.VERSION_CODE));
     }
 
     @SuppressLint("MissingPermission")
