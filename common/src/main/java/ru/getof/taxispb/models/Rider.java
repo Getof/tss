@@ -12,7 +12,6 @@ import static ru.getof.taxispb.BR.*;
 
 public class Rider extends BaseObservable {
 
-    public long id;
     @Expose
     @SerializedName("first_name")
     public String firstName;
@@ -41,17 +40,7 @@ public class Rider extends BaseObservable {
         return (new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create().toJson(rider));
     }
 
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-
-
-    public String getFirstName() {
+   public String getFirstName() {
         return firstName;
     }
 

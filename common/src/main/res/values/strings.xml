@@ -13,6 +13,9 @@
     <string name="info">Информация!</string>
     <string name="login_failed">Ошибка входа.</string>
     <string name="copyright_notice">Copyright© 2020 Getof All Rights reserved.</string>
+    <string name="txt_origin">Откуда забрать</string>
+    <string name="txt_destination">Куда</string>
+
 
 
 

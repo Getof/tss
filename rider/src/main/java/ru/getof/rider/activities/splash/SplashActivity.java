@@ -1,4 +1,4 @@
-package ru.getof.rider;
+package ru.getof.rider.activities.splash;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
@@ -8,8 +8,8 @@ import android.content.Intent;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
-import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.view.WindowManager;
 
@@ -29,16 +29,21 @@ import org.greenrobot.eventbus.ThreadMode;
 import java.util.Collections;
 import java.util.List;
 
+import ru.getof.rider.R;
+import ru.getof.rider.activities.main.MainActivity;
 import ru.getof.rider.databinding.ActivitySplashBinding;
 import ru.getof.rider.events.LoginResultEvent;
 import ru.getof.rider.services.RiderService;
 import ru.getof.taxispb.components.BaseActivity;
 import ru.getof.taxispb.events.BackgroundServiceStartedEvent;
 import ru.getof.taxispb.events.ConnectEvent;
+import ru.getof.taxispb.events.ConnectResultEvent;
 import ru.getof.taxispb.events.LoginEvent;
+import ru.getof.taxispb.models.Rider;
 import ru.getof.taxispb.utils.AlertDialogBuilder;
 import ru.getof.taxispb.utils.AlerterHelper;
 import ru.getof.taxispb.utils.CommonUtils;
+import ru.getof.taxispb.utils.LocationHelper;
 import ru.getof.taxispb.utils.MyPreferenceManager;
 
 public class SplashActivity extends BaseActivity implements LocationListener {
@@ -48,6 +53,7 @@ public class SplashActivity extends BaseActivity implements LocationListener {
     LatLng currentLocation;
     MyPreferenceManager SP;
     ActivitySplashBinding binding;
+    Handler locationTimeoutHandler;
 
     private PermissionListener permissionListener = new PermissionListener() {
         @Override
@@ -95,7 +101,7 @@ public class SplashActivity extends BaseActivity implements LocationListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = DataBindingUtil.setContentView(SplashActivity.this,R.layout.activity_splash);
+        binding = DataBindingUtil.setContentView(SplashActivity.this, R.layout.activity_splash);
         binding.loginButton.setOnClickListener(onLoginButtonClicked);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
         SP = MyPreferenceManager.getInstance(getApplicationContext());
@@ -117,6 +123,43 @@ public class SplashActivity extends BaseActivity implements LocationListener {
         SP.putString("rider_user", event.riderJson);
         SP.putString("rider_token", event.jwtToken);
         tryConnect();
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onConnectedResult(ConnectResultEvent event) {
+        if (event.hasError()) {
+            binding.progressBar.setVisibility(View.INVISIBLE);
+            event.showError(SplashActivity.this, result -> {
+                if (result == AlertDialogBuilder.DialogResult.RETRY) {
+                    eventBus.post(new ConnectEvent(SP.getString("rider_token", null)));
+                    binding.progressBar.setVisibility(View.VISIBLE);
+                } else {
+                    binding.loginButton.setVisibility(View.VISIBLE);
+                }
+            });
+            return;
+        }
+        locationTimeoutHandler = new Handler();
+        locationTimeoutHandler.postDelayed(() -> {
+            locationManager.removeUpdates(SplashActivity.this);
+            if (currentLocation == null) {
+                String[] location = getString(R.string.defaultLocation).split(",");
+                double lat = Double.parseDouble(location[0]);
+                double lng = Double.parseDouble(location[1]);
+                currentLocation = new LatLng(lat, lng);
+            }
+            startMainActivity(currentLocation);
+
+        }, 5000);
+        searchCurrentLocation();
+        CommonUtils.rider = Rider.fromJson(SP.getString("rider_user", "{}"));
+    }
+
+    private void startMainActivity(LatLng currentLocation) {
+        Intent intent = new Intent(SplashActivity.this, MainActivity.class);
+        double[] array = LocationHelper.LatLngToDoubleArray(currentLocation);
+        intent.putExtra("currentLocation", array);
+        startActivity(intent);
     }
 
     @Subscribe

@@ -46,6 +46,7 @@ dependencies {
     api 'com.google.firebase:firebase-auth:19.3.2'
     api 'com.firebaseui:firebase-ui-auth:6.3.0'
     api 'com.google.android.gms:play-services-maps:17.0.0'
+    api 'com.pollux:dualprogressview:0.0.1'
 
 
     annotationProcessor 'org.greenrobot:eventbus-annotation-processor:3.2.0'

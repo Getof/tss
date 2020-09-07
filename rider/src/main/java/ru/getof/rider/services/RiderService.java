@@ -36,6 +36,7 @@ import ru.getof.taxispb.events.ConnectEvent;
 import ru.getof.taxispb.events.ConnectResultEvent;
 import ru.getof.taxispb.events.DisconnectedEvent;
 import ru.getof.taxispb.events.LoginEvent;
+import ru.getof.taxispb.events.ProfileInfoChangedEvent;
 import ru.getof.taxispb.models.Rider;
 import ru.getof.taxispb.utils.CommonUtils;
 import ru.getof.taxispb.utils.MyPreferenceManager;
@@ -63,34 +64,34 @@ public class RiderService extends Service {
                 } catch (JSONException c) {
                     eventBus.post(new ConnectResultEvent(ServerResponse.UNKNOWN_ERROR.getValue(), args[0].toString()));
                 }
-            });
-                    /*.on("driverInLocation", args -> {
-                try {
-                    NotificationCompat.Builder mBuilder =
-                            new NotificationCompat.Builder(RiderService.this)
-                                    .setSmallIcon(R.drawable.fab_requests)
-                                    .setContentTitle(getString(R.string.app_name))
-                                    .setDefaults(NotificationCompat.DEFAULT_LIGHTS | NotificationCompat.DEFAULT_SOUND | NotificationCompat.DEFAULT_VIBRATE)
-                                    .setContentText(getString(R.string.notification_driver_in_location));
-                    NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-                    if (notificationManager != null) {
-                        notificationManager.notify(0, mBuilder.build());
-                    }
-                } catch (Exception c) {
-                    c.printStackTrace();
-                }
-            }).on("startTravel", args -> eventBus.post(new ServiceStartedEvent())).on("cancelTravel", args -> eventBus.post(new ServiceCancelResultEvent(200)))
-                    .on("driverAccepted", args -> eventBus.post(new NewDriverAcceptedEvent(args[0].toString(), (Integer) args[1], (Integer) args[2], (Double.valueOf(args[3].toString())))))
-                    .on("finishedTaxi", args -> eventBus.post(new ServiceFinishedEvent((Integer) args[0], (Boolean) args[1], Float.parseFloat(args[2].toString()))))
+            })
+//                    .on("driverInLocation", args -> {
+//                try {
+//                    NotificationCompat.Builder mBuilder =
+//                            new NotificationCompat.Builder(RiderService.this)
+//                                    .setSmallIcon(R.drawable.fab_requests)
+//                                    .setContentTitle(getString(R.string.app_name))
+//                                    .setDefaults(NotificationCompat.DEFAULT_LIGHTS | NotificationCompat.DEFAULT_SOUND | NotificationCompat.DEFAULT_VIBRATE)
+//                                    .setContentText(getString(R.string.notification_driver_in_location));
+//                    NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+//                    if (notificationManager != null) {
+//                        notificationManager.notify(0, mBuilder.build());
+//                    }
+//                } catch (Exception c) {
+//                    c.printStackTrace();
+//                }
+//            }).on("startTravel", args -> eventBus.post(new ServiceStartedEvent())).on("cancelTravel", args -> eventBus.post(new ServiceCancelResultEvent(200)))
+//                    .on("driverAccepted", args -> eventBus.post(new NewDriverAcceptedEvent(args[0].toString(), (Integer) args[1], (Integer) args[2], (Double.valueOf(args[3].toString())))))
+//                    .on("finishedTaxi", args -> eventBus.post(new ServiceFinishedEvent((Integer) args[0], (Boolean) args[1], Float.parseFloat(args[2].toString()))))
                     .on("riderInfoChanged", args -> {
                         MyPreferenceManager SP = new MyPreferenceManager(getApplicationContext());
                         SP.putString("rider_user", args[0].toString());
                         CommonUtils.rider = Rider.fromJson(args[0].toString());
                         eventBus.postSticky(new ProfileInfoChangedEvent());
-                    })
-                    .on("travelInfoReceived", args -> {
-                        eventBus.post(new GetTravelInfoResultEvent((int) args[0], (int) args[1], Float.parseFloat(args[2].toString()), Float.valueOf(args[3].toString()), Float.valueOf(args[4].toString())));
-                    });*/
+                    });
+//                    .on("travelInfoReceived", args -> {
+//                        eventBus.post(new GetTravelInfoResultEvent((int) args[0], (int) args[1], Float.parseFloat(args[2].toString()), Float.valueOf(args[3].toString()), Float.valueOf(args[4].toString())));
+//                    });
             socket.connect();
 
         } catch (Exception ignored) {
