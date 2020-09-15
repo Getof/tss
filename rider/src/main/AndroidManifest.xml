@@ -11,9 +11,10 @@
         android:supportsRtl="true"
         android:theme="@style/TssTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".activities.main.MainActivity"
-            android:theme="@style/TssTheme"/>
-
+        <activity android:name=".activities.RequestDriverActivity"/>
+        <activity
+            android:name=".activities.main.MainActivity"
+            android:theme="@style/TssTheme" />
         <activity android:name=".activities.splash.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

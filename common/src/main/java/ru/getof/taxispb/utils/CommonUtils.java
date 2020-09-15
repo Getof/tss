@@ -13,12 +13,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.gms.maps.model.LatLng;
 
 import ru.getof.taxispb.R;
+import ru.getof.taxispb.models.Driver;
 import ru.getof.taxispb.models.Rider;
 
 public class CommonUtils {
 
     public static Rider rider;
     public static CountDownTimer currentTimer;
+    public static Driver driver;
 
     public static void displayPromptForEnablingGPS(final AppCompatActivity activity) {
         final String action = Settings.ACTION_LOCATION_SOURCE_SETTINGS;

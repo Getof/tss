@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="server_address" translatable="false">http://89.145.146.20:3030/</string>
+    <string name="server_address" translatable="false">http://194.5.79.35:3030/</string>
 
     <string name="payment_currency" translatable="false">usd</string>
     <string name="defaultLocation" translatable="false">40.1792,44.4991</string>

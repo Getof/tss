@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
@@ -19,6 +20,8 @@ import androidx.databinding.DataBindingUtil;
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.IdpResponse;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.gun0912.tedpermission.BuildConfig;
 import com.gun0912.tedpermission.PermissionListener;
 import com.gun0912.tedpermission.TedPermission;
@@ -28,7 +31,10 @@ import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
+import io.reactivex.Completable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
 import ru.getof.rider.R;
 import ru.getof.rider.activities.main.MainActivity;
 import ru.getof.rider.databinding.ActivitySplashBinding;
@@ -54,6 +60,8 @@ public class SplashActivity extends BaseActivity implements LocationListener {
     MyPreferenceManager SP;
     ActivitySplashBinding binding;
     Handler locationTimeoutHandler;
+    private FirebaseAuth firebaseAuth;
+    private FirebaseAuth.AuthStateListener listener;
 
     private PermissionListener permissionListener = new PermissionListener() {
         @Override
@@ -81,22 +89,20 @@ public class SplashActivity extends BaseActivity implements LocationListener {
                 }
             }
         } catch (Exception e) {
+            Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
             e.printStackTrace();
         }
         return false;
     }
 
-    private View.OnClickListener onLoginButtonClicked = view -> {
-        startActivityForResult(
-                AuthUI.getInstance()
-                .createSignInIntentBuilder()
-                .setAvailableProviders(
-                        Collections.singletonList(new AuthUI.IdpConfig.PhoneBuilder().build())
-                )
-                .build(),
-                RC_SIGN_IN);
-
-    };
+    private View.OnClickListener onLoginButtonClicked = view -> startActivityForResult(
+            AuthUI.getInstance()
+            .createSignInIntentBuilder()
+            .setIsSmartLockEnabled(false)
+            .setAvailableProviders(
+                    Collections.singletonList(new AuthUI.IdpConfig.PhoneBuilder().build())
+            )
+            .build(), RC_SIGN_IN);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -188,6 +194,20 @@ public class SplashActivity extends BaseActivity implements LocationListener {
             });
             return;
         }
+
+
+//        firebaseAuth = FirebaseAuth.getInstance();
+//        listener = myFirebaseAuth -> {
+//            FirebaseUser user = myFirebaseAuth.getCurrentUser();
+//            if (user != null) {
+//                binding.loginButton.setVisibility(View.GONE);
+//                String phone = user.getPhoneNumber();
+//                tryLogin(phone);
+//            } else {
+//
+//            }
+//        };
+
         TedPermission.with(this)
                 .setPermissionListener(permissionListener)
                 .setDeniedMessage(getString(R.string.message_permission_denied))
@@ -199,21 +219,32 @@ public class SplashActivity extends BaseActivity implements LocationListener {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == RC_SIGN_IN) {
+            IdpResponse response = IdpResponse.fromResultIntent(data);
             if (resultCode == RESULT_OK) {
-                    IdpResponse idpResponse = IdpResponse.fromResultIntent(data);
-                    String phone;
-                    if (idpResponse != null) {
-                        phone = idpResponse.getPhoneNumber();
-                        if (phone != null) {
-                            tryLogin(phone);
-                        }
-                        return;
+                    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                    if (user != null){
+                        String phone = user.getPhoneNumber();
+                        tryLogin(phone);
                     }
+                } else {
 
+
+
+//                IdpResponse idpResponse = IdpResponse.fromResultIntent(data);
+//                    String phone;
+//                if (idpResponse != null){
+//                    phone = idpResponse.getPhoneNumber();
+//                    if (phone != null) {
+//                        tryLogin(phone);
+//                    }
+//                }
+
+                Toast.makeText(this, response.getError().getMessage(), Toast.LENGTH_SHORT).show();
 
             }
-            AlerterHelper.showError(SplashActivity.this, getString(R.string.login_failed));
+            return;
         }
+        AlerterHelper.showError(SplashActivity.this, getString(R.string.login_failed));
     }
 
     private void tryLogin(String phone) {
@@ -254,5 +285,15 @@ public class SplashActivity extends BaseActivity implements LocationListener {
     protected void onResume() {
         super.onResume();
         tryConnect();
+    }
+
+
+
+    private void delaySplashScree() {
+//        Completable.timer(1, TimeUnit.SECONDS,
+//                AndroidSchedulers.mainThread())
+//                .subscribe(() ->
+//                        firebaseAuth.addAuthStateListener(listener)
+//                );
     }
 }
