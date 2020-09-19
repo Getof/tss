@@ -4,6 +4,10 @@
     <color name="colorPrimaryDark">#F57C00</color>
     <color name="colorAccent">#607D8B</color>
 
+    <color name="colorPrimaryDriver">#607D8B</color>
+    <color name="colorPrimaryDarkDriver">#455A64</color>
+    <color name="colorAccentDriver">#9E9E9E</color>
+
     <!--Accent Color Collection-->
     <color name="accent_red">#f44336</color>
     <color name="accent_pink">#e91e63</color>

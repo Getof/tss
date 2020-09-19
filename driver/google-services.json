@@ -1,0 +1,93 @@
+{
+  "project_info": {
+    "project_number": "645524873558",
+    "firebase_url": "https://smarttaxi-fc5fd.firebaseio.com",
+    "project_id": "smarttaxi-fc5fd",
+    "storage_bucket": "smarttaxi-fc5fd.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:645524873558:android:21a3186a488b68a01f36f7",
+        "android_client_info": {
+          "package_name": "ru.getof.driver"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "645524873558-2i9tnt9mcsjm7tg78cp1pctvfq9vreab.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "ru.getof.driver",
+            "certificate_hash": "bf82038bcf893f297ee621fbbefedb7d279794d1"
+          }
+        },
+        {
+          "client_id": "645524873558-roieibk5ir7ldjae3r4ioh7a23u11623.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCNFwglveD6RAKR4NUaWElzBR1nLfzu9g4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "645524873558-roieibk5ir7ldjae3r4ioh7a23u11623.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:645524873558:android:b2f2892863a2c1bd1f36f7",
+        "android_client_info": {
+          "package_name": "ru.getof.rider"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "645524873558-l3hsafjuv1d8516crd26rr05jt2he9o7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "ru.getof.rider",
+            "certificate_hash": "320422954e78f5e8bd7b2ef8159cd8b51965185e"
+          }
+        },
+        {
+          "client_id": "645524873558-75vbtlusc781nlj2tsi6rn7j8nc7p6nt.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "ru.getof.rider",
+            "certificate_hash": "bf82038bcf893f297ee621fbbefedb7d279794d1"
+          }
+        },
+        {
+          "client_id": "645524873558-roieibk5ir7ldjae3r4ioh7a23u11623.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCNFwglveD6RAKR4NUaWElzBR1nLfzu9g4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "645524873558-roieibk5ir7ldjae3r4ioh7a23u11623.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

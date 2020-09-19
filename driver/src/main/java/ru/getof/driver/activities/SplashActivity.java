@@ -29,10 +29,13 @@ import org.greenrobot.eventbus.ThreadMode;
 import java.util.Collections;
 import java.util.List;
 
+
+import ru.getof.driver.MainActivity;
 import ru.getof.driver.R;
 import ru.getof.driver.databinding.ActivitySplashBinding;
 import ru.getof.driver.events.LoginResultEvent;
 import ru.getof.driver.services.DriverService;
+
 import ru.getof.taxispb.BuildConfig;
 import ru.getof.taxispb.components.BaseActivity;
 import ru.getof.taxispb.events.BackgroundServiceStartedEvent;

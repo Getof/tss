@@ -8,6 +8,13 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="TssThemeDriver" parent="Theme.AppCompat.DayNight.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimaryDriver</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDarkDriver</item>
+        <item name="colorAccent">@color/colorAccentDriver</item>
+    </style>
+
 
 
 </resources>
