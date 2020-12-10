@@ -3,21 +3,21 @@ apply plugin: 'com.google.gms.google-services'
 
 android {
     signingConfigs {
-        debug {
-            storeFile file('E:\\Android\\Key\\oficial_key.jks')
-            storePassword '22031980bohDEN'
-            keyAlias 'key0'
-            keyPassword '22031980bohDEN'
-        }
-        release {
-            storeFile file('E:\\Android\\Key\\oficial_key.jks')
-            storePassword '22031980bohDEN'
-            keyAlias 'key0'
-            keyPassword '22031980bohDEN'
-        }
+//        debug {
+//            storeFile file('E:\\Android\\Key\\oficial_key.jks')
+//            storePassword '22031980bohDEN'
+//            keyAlias 'key0'
+//            keyPassword '22031980bohDEN'
+//        }
+//        release {
+//            storeFile file('E:\\Android\\Key\\oficial_key.jks')
+//            storePassword '22031980bohDEN'
+//            keyAlias 'key0'
+//            keyPassword '22031980bohDEN'
+//        }
     }
     compileSdkVersion 30
-    buildToolsVersion "30.0.2"
+    buildToolsVersion "30.0.3"
 
     defaultConfig {
         applicationId "ru.getof.driver"
@@ -50,13 +50,13 @@ android {
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation 'androidx.appcompat:appcompat:1.2.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.1'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
     implementation 'com.google.android.material:material:1.2.1'
-    implementation 'androidx.navigation:navigation-fragment:2.3.0'
-    implementation 'androidx.navigation:navigation-ui:2.3.0'
+    implementation 'androidx.navigation:navigation-fragment:2.3.2'
+    implementation 'androidx.navigation:navigation-ui:2.3.2'
     implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
-    implementation 'com.google.firebase:firebase-analytics:17.5.0'
-    testImplementation 'junit:junit:4.13'
+    implementation 'com.google.firebase:firebase-analytics:18.0.0'
+    testImplementation 'junit:junit:4.13.1'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
     api project(':common')
